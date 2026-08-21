@@ -38,7 +38,7 @@ class ResNet(nn.Module):
             nn.LazyConv2d(64, kernel_size=3, stride=1, padding=1),
             nn.LazyBatchNorm2d(),
             nn.ReLU(),
-            nn.MaxPool2d(kernel_size=3, stride=2, padding=1)
+            nn.MaxPool2d(kernel_size=3, stride=1, padding=1)
         )
 
     def block(self, num_residuals, num_channels,first_block=False):
