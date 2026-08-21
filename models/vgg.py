@@ -19,14 +19,14 @@ def vgg_block(num_convs, out_channels):
 class VGG(nn.Module):
     def __init__(self, num_classes:int):
         super().__init__()
-        arch = ((1, 64), (1, 128), (2, 256), (2, 512), (2, 512))
+        arch = ((2, 64), (2, 128), (2, 256), (3, 512), (3, 512))
         vgg_blks = []
         for num_convs, out_channels in arch:
             vgg_blks.append(vgg_block(num_convs, out_channels))
         self.net = nn.Sequential(
             *vgg_blks,
             nn.ReLU(),
-            nn.Dropout(p=0.5),
+            nn.Flatten(),
             nn.LazyLinear(4096),
             nn.ReLU(),
             nn.Dropout(p=0.5),
