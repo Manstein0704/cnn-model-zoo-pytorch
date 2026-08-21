@@ -25,16 +25,21 @@ class Inception(nn.Module):
             nn.ReLU()
         )
         self.branch4 = nn.Sequential(
-            nn.MaxPool2d(kernel_size=3, padding=1),
-            nn.LazyConv2d(c4, kernel_size=1)             
+            nn.MaxPool2d(kernel_size=3, padding=1, stride=1),
+            nn.LazyConv2d(c4, kernel_size=1),
+            nn.ReLU()             
         )
 
     def forward(self, X):
-        return torch.cat(self.branch1(X),
-                         self.branch2(X),
-                         self.branch3(X),
-                         self.branch4(X),
-                        dim = 1)
+        return torch.cat(
+            (
+                self.branch1(X),
+                self.branch2(X),
+                self.branch3(X),
+                self.branch4(X),
+            ),
+            dim = 1
+        )
 
 
 class GoogleNet(nn.Module):
@@ -85,6 +90,9 @@ class GoogleNet(nn.Module):
             self.b1(), self.b2(), self.b3(), self.b4(), self.b5(),
             nn.LazyLinear(n_classes)
         )
+
+    def forward(self, X):
+        return self.net(X)
 
 
 if __name__=="__main__":
