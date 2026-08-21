@@ -38,6 +38,7 @@ def main():
     elif args.model == "vgg":
         model = VGG(num_classes=num_classes)
 
+    model = model.to(device)
     optimizer = optim.Adam(model.parameters(), lr=args.lr)
     criterion = nn.CrossEntropyLoss()
     #Start Learning
@@ -45,8 +46,8 @@ def main():
         train_acc, train_loss = train(model, optimizer, criterion, train_loader, device)
         test_acc, test_loss = evaluate(model, criterion, test_loader, device)
 
-        if epoch==0 or ((epoch+1)//10) == 0:
-            print(f"{epoch}/{args.num_epochs}, test_acc:{test_acc}, test_loss:{test_loss}")
+        if epoch==0 or ((epoch+1)%10) == 0:
+            print(f"{epoch+1}/{args.num_epochs}, test_acc:{test_acc}, test_loss:{test_loss}")
 
 
 
