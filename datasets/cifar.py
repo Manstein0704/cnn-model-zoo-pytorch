@@ -7,13 +7,13 @@ def get_dataloader(batch_size:int, root="./data"):
     transform_train = transforms.Compose([
         transforms.RandomHorizontalFlip(p=0.5),
         transforms.ToTensor(),
-        transforms.Normalize((0.5, 0.5, 0.5)),
+        transforms.Normalize((0.5, 0.5, 0.5), (0.5, 0.5, 0.5)),
         transforms.RandomErasing(p=0.5, scale=(0.02, 0.33), ratio=(0.3, 3.3))
     ])
 
     transform_test = transforms.Compose([
         transforms.ToTensor(),
-        transforms.Normalize((0.5, 0.5, 0.5))
+        transforms.Normalize((0.5, 0.5, 0.5), (0.5, 0.5, 0.5))
     ])
 
     dataset_train = datasets.CIFAR10(root=root, transform=transform_train, download=True)
