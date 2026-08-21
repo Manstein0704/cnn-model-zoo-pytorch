@@ -1,6 +1,6 @@
 import torch
 import torch.nn as nn
-
+from torchinfo import summary
 
 
 
@@ -32,4 +32,9 @@ class AlexNet(nn.Module):
 
     def forward(self, X):
         return self.net(X)
+
     
+if __name__=="__main__":
+    model = AlexNet(num_classes=10)
+    summary(model, input_size=(1, 3, 32, 32))
+
