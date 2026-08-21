@@ -1,10 +1,9 @@
 import torch
-import torch.optim as optim
 from tqdm import tqdm
 
 
 
-def trainer(model, optimizer:optim, criterion, train_loader, device):
+def train(model, optimizer, criterion, train_loader, device):
     model.train()
     n_train, n_acc, total_loss = 0, 0, 0
     
