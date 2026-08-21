@@ -29,7 +29,7 @@ def train(model, optimizer, criterion, train_loader, device):
 
 
 @torch.no_grad()
-def test(model, criterion, test_loader, device):
+def evaluate(model, criterion, test_loader, device):
     model.eval()
     n_test, n_acc, total_loss = 0, 0, 0
 

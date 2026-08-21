@@ -42,7 +42,7 @@ def main():
     criterion = nn.CrossEntropyLoss()
     #Start Learning
     for epoch in range(args.num_epochs):
-        train_acc, train_loss = train(model, train_loader, criterion, train_loader, device)
+        train_acc, train_loss = train(model, optimizer, criterion, train_loader, device)
         test_acc, test_loss = evaluate(model, criterion, test_loader, device)
 
         if epoch==0 or ((epoch+1)//10) == 0:
@@ -72,3 +72,6 @@ def parse_args():
 
     return parser.parse_args()
 
+
+if __name__ == "__main__":
+    main()
